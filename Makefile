@@ -5,7 +5,7 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sat May 27 16:23:37 2017 Leo Le Diouron
-## Last update Sat May 27 16:30:23 2017 Leo Le Diouron
+## Last update Sat May 27 17:01:40 2017 Thomas LE MOULLEC
 ##
 
 NAME_SERVER		=		server
@@ -16,9 +16,9 @@ CC			=		gcc
 
 RM			=		rm -rf
 
-PATH_SERVER		=		./server/src/
+PATH_SERVER		=		./Server/src/
 
-PATH_CLIENT		=		./client/src/
+PATH_CLIENT		=		./Client/src/
 
 SRCS_SERVER		=		$(PATH_SERVER)main.c		\
 
@@ -30,7 +30,7 @@ OBJS_CLIENT		=		$(SRCS_CLIENT:.c=.o)
 
 CFLAGS			=		-W -Wall -Wextra $(INC)
 
-INC			=		-I ./server/inc/ -I ./client/inc/
+INC			=		-I ./Server/inc/ -I ./Client/inc/
 
 all:					$(NAME_SERVER) $(NAME_CLIENT)
 
@@ -44,6 +44,6 @@ clean:
 					$(RM) $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean:					clean
-					$(RM) $(NAME_SERVER) $(OBJS_CLIENT)
+					$(RM) $(NAME_CLIENT) $(NAME_SERVER)
 
 re:					fclean all

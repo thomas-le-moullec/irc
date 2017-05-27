@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:26:07 2017 Thomas LE MOULLEC
-** Last update Sat May 27 16:37:56 2017 Thomas LE MOULLEC
+** Last update Sat May 27 17:00:48 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -26,6 +26,8 @@
 #define FD_SERVER 2
 
 #define MAX_FD 255
+
+typedef void(*fct)();
 
 typedef struct		s_env
 {
