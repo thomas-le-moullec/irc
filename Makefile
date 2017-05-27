@@ -5,14 +5,14 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sat May 27 16:23:37 2017 Leo Le Diouron
-## Last update Sat May 27 18:16:54 2017 Thomas LE MOULLEC
+## Last update Sat May 27 18:59:49 2017 Thomas LE MOULLEC
 ##
 
 NAME_SERVER		=		server
 
 NAME_CLIENT		=		client
 
-CC			=		gcc
+CC			=		gcc -g
 
 RM			=		rm -rf
 
@@ -21,6 +21,7 @@ PATH_SERVER		=		./Server/src/
 PATH_CLIENT		=		./Client/src/
 
 SRCS_SERVER		=		$(PATH_SERVER)main.c			\
+					$(PATH_SERVER)user.c			\
 
 SRCS_CLIENT		=		$(PATH_CLIENT)main.c			\
 					$(PATH_CLIENT)run_client.c		\
