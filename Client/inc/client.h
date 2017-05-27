@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:25:29 2017 Thomas LE MOULLEC
-** Last update Sat May 27 16:28:16 2017 Thomas LE MOULLEC
+** Last update Sat May 27 17:04:02 2017 Thomas LE MOULLEC
 */
 
 #ifndef CLIENT_H_
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define ERROR -84
+#define ERROR 84
 #define SUCCESS 0
 
 #endif
