@@ -5,12 +5,13 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:24:16 2017 Thomas LE MOULLEC
-** Last update Sat May 27 17:06:16 2017 Thomas LE MOULLEC
+** Last update Sat May 27 17:08:47 2017 Thomas LE MOULLEC
 */
 
 #include "client.h"
 
 int			main()
 {
+  run_client();
   return (SUCCESS);
 }

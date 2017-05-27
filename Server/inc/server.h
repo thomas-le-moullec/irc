@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:26:07 2017 Thomas LE MOULLEC
-** Last update Sat May 27 17:04:26 2017 Thomas LE MOULLEC
+** Last update Sat May 27 17:11:07 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -29,6 +29,12 @@
 #define ERROR 84
 
 #define MAX_FD 255
+
+typedef enum
+  {
+    false,
+        true
+  } bool;
 
 typedef void(*fct)();
 
