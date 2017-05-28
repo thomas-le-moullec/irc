@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sun May 28 15:57:53 2017 Thomas LE MOULLEC
+** Last update Sun May 28 16:07:49 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -20,6 +20,7 @@ void		client_read(t_env *e, int fd)
     {
       buf[r] = '\0';
       printf("%d: %s\n", fd, buf);
+      // exec_order(buf, server, fd);
     }
   else
     {
