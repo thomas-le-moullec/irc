@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:26:07 2017 Thomas LE MOULLEC
-** Last update Sat May 27 18:00:41 2017 Leo Le Diouron
+** Last update Sun May 28 13:55:29 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -32,7 +32,7 @@
 
 typedef void(*fct)();
 
-struct 		s_chan;
+struct			s_chan;
 struct  		s_user;
 
 typedef struct		s_env
@@ -53,8 +53,8 @@ typedef struct		s_chan
 typedef struct		s_user
 {
   char			*nickname;
-  struct s_chan		*chans;
   int			fd;
+  struct s_chan		*chans;
   struct s_user		*next;
   struct s_user		*prev;
 }			t_user;
@@ -71,6 +71,7 @@ typedef struct		s_server
   fd_set		fd_read;
 }			t_server;
 
-t_user    *add_user(t_user *, char *, int, t_chan *);
+t_user		*add_user(t_user *, char *, int, t_chan *);
+t_chan		*add_channel(t_chan *, char *, t_user *);
 
 #endif
