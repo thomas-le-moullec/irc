@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sun May 28 14:16:13 2017 Leo Le Diouron
+** Last update Sun May 28 14:36:12 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -29,6 +29,8 @@
 #define ERROR 84
 
 #define MAX_FD 255
+
+#define LOCALHOST "127.0.0.1"
 
 typedef enum
   {
