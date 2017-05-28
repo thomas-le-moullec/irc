@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sun May 28 14:16:13 2017 Leo Le Diouron
+** Last update Sun May 28 14:48:07 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -46,6 +46,7 @@ typedef struct		s_env
   char			fd_type[MAX_FD];
   fct			fct_read[MAX_FD];
   fct			fct_write[MAX_FD];
+  int			port;
 }			t_env;
 
 typedef struct		s_chan
@@ -70,9 +71,8 @@ typedef struct		s_server
   t_chan		*chan;
   t_user		*users;
   int			fd;
-  int			port;
   char			*ip;
-  t_env			*e;
+  t_env			e;
   struct timeval	tv;
   fd_set		fd_read;
 }			t_server;
