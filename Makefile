@@ -4,8 +4,8 @@
 ## Made by Leo Le Diouron
 ## Login   <le-dio_l@epitech.net>
 ## 
-## Started on  Sat May 27 16:23:37 2017 Leo Le Diouron
-## Last update Sun May 28 13:56:40 2017 Leo Le Diouron
+## Started on  Sun May 28 14:15:02 2017 Leo Le Diouron
+## Last update Sun May 28 14:15:19 2017 Leo Le Diouron
 ##
 
 NAME_SERVER		=		server
@@ -24,7 +24,11 @@ SRCS_SERVER		=		$(PATH_SERVER)main.c		\
 					$(PATH_SERVER)user.c		\
 					$(PATH_SERVER)channel.c		\
 
-SRCS_CLIENT		=		$(PATH_CLIENT)main.c		\
+SRCS_CLIENT		=		$(PATH_CLIENT)main.c			\
+					$(PATH_CLIENT)run_client.c		\
+					$(PATH_CLIENT)get_order.c		\
+					$(PATH_CLIENT)handle_server.c		\
+					$(PATH_CLIENT)my_str_to_wordtab.c	\
 
 OBJS_SERVER		=		$(SRCS_SERVER:.c=.o)
 

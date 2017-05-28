@@ -1,11 +1,11 @@
 /*
-** server.h for server in /home/le-mou_t/rendu/TEK2/C/PSU_2016_myirc
+** server.h for server in /home/le-dio_l/PSU_2016_myirc
 ** 
-** Made by Thomas LE MOULLEC
-** Login   <le-mou_t@epitech.net>
+** Made by Leo Le Diouron
+** Login   <le-dio_l@epitech.net>
 ** 
-** Started on  Sat May 27 16:26:07 2017 Thomas LE MOULLEC
-** Last update Sun May 28 13:55:29 2017 Leo Le Diouron
+** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
+** Last update Sun May 28 14:16:13 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -29,6 +29,12 @@
 #define ERROR 84
 
 #define MAX_FD 255
+
+typedef enum
+  {
+    false,
+        true
+  } bool;
 
 typedef void(*fct)();
 
