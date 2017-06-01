@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sun May 28 15:53:08 2017 Thomas LE MOULLEC
+** Last update Mon May 29 22:42:33 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -29,6 +29,8 @@
 #define ERROR 84
 
 #define MAX_FD 255
+#define MAX_MSG 10
+#define MAX_CHAR 512
 
 #define LOCALHOST "127.0.0.1"
 
@@ -43,36 +45,39 @@ typedef void(*fct)();
 struct			s_chan;
 struct  		s_user;
 
+typedef struct		s_msg
+{
+  char			queue[MAX_MSG][MAX_CHAR];
+  bool			is_empty;
+}			t_msg;
+
 typedef struct		s_env
 {
   char			fd_type[MAX_FD];
   fct			fct_read[MAX_FD];
   fct			fct_write[MAX_FD];
   int			port;
+  t_msg			msg[MAX_FD];
 }			t_env;
-
-typedef struct		s_chan
-{
-  char			*name;
-  struct s_user		*users;
-  struct s_chan		*next;
-  struct s_chan		*prev;
-}			t_chan;
 
 typedef struct		s_user
 {
   char			*nickname;
   int			fd;
-  struct s_chan		*chans;
-  struct s_user		*next;
-  struct s_user		*prev;
+  struct s_chan		chans[MAX_FD];
 }			t_user;
+
+typedef struct		s_chan
+{
+  char			*name;
+  struct s_user		users[MAX_FD];
+}	 		t_chan;
 
 typedef struct		s_server
 {
   int			fd_max;
-  t_chan		*chan;
-  t_user		*users;
+  t_chan		chan[MAX_FD];
+  t_user		users[MAX_FD];
   int			fd;
   char			*ip;
   t_env			e;
@@ -89,6 +94,7 @@ void            run_server(t_server *);
 void            add_server(t_env *);
 void		add_client(t_env *, int);
 void            server_read(t_env *, int);
+void            server_write(t_env *, int);
 void            client_read(t_env *, int);
 
 #endif

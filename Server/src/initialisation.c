@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:33:40 2017 Thomas LE MOULLEC
-** Last update Sun May 28 15:11:30 2017 Thomas LE MOULLEC
+** Last update Mon May 29 22:32:00 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -21,6 +21,7 @@ void		initialise_server(t_server *server, char *port)
   server->tv.tv_usec = 0;
   FD_ZERO(&server->fd_read);
   memset(server->e.fd_type, 0, MAX_FD);
+  memset(server->e.msg, 0, MAX_FD);
   add_server(&server->e);
 }
 
@@ -34,6 +35,8 @@ void		set_fds(t_server *server)
       if (server->e.fd_type[i] != FD_FREE)
 	{
 	  FD_SET(i, &server->fd_read);
+	  if (server->e.msg[i].is_empty == false)
+	    FD_SET(i, &server->fd_write);
 	  server->fd_max = i;
 	}
       i++;

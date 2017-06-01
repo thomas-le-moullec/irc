@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Sun May 28 15:55:05 2017 Thomas LE MOULLEC
+** Last update Mon May 29 22:36:51 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -14,6 +14,11 @@ void			server_read(t_env *e, int fd)
 {
   printf("New client\n");
   add_client(e, fd);
+}
+
+void			server_write(t_env *e, int fd)
+{
+  dprintf(fd, "Here is a message !\n");
 }
 
 void			add_server(t_env *e)
@@ -27,10 +32,10 @@ void			add_server(t_env *e)
   sin.sin_port = htons(e->port);
   sin.sin_addr.s_addr = INADDR_ANY;
   bind(s, (struct sockaddr*)&sin, sizeof(sin));
-  listen(s, 42);
+  listen(s, MAX_FD);
   e->fd_type[s] = FD_SERVER;
   e->fct_read[s] = server_read;
-  e->fct_write[s] = NULL;
+  e->fct_write[s] = server_write;
 }
 
 void			get_order(t_server *server)
@@ -42,6 +47,8 @@ void			get_order(t_server *server)
     {
       if (FD_ISSET(i, &server->fd_read))
 	server->e.fct_read[i](&server->e, i);
+      if (FD_ISSET(i, &server->fd_write))
+	server->e.fct_write[i](&server->e, i);
       i++;
     }
 }
@@ -54,6 +61,7 @@ void			run_server(t_server *server)
   while (end == false)
     {
       FD_ZERO(&server->fd_read);
+      FD_ZERO(&server->fd_write);
       server->fd_max = 0;
       set_fds(server);
       if (select(server->fd_max + 1, &server->fd_read, NULL, NULL, &server->tv) == -1)
