@@ -5,15 +5,16 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:33:40 2017 Thomas LE MOULLEC
-** Last update Mon May 29 22:32:00 2017 Thomas LE MOULLEC
+** Last update Thu Jun  1 20:17:43 2017 Leo Le Diouron
 */
 
 #include "server.h"
 
 void		initialise_server(t_server *server, char *port)
 {
-  server->chan = NULL;
-  server->users = NULL;
+  int		i;
+
+  i = 0;
   server->fd = 0;
   server->e.port = atoi(port);
   server->ip = LOCALHOST;
@@ -21,7 +22,9 @@ void		initialise_server(t_server *server, char *port)
   server->tv.tv_usec = 0;
   FD_ZERO(&server->fd_read);
   memset(server->e.fd_type, 0, MAX_FD);
-  memset(server->e.msg, 0, MAX_FD);
+  memset(server->e.msg, 0, MAX_FD * sizeof(t_msg));
+  while (i < MAX_FD)
+    server->e.msg[i++].is_empty = true;
   add_server(&server->e);
 }
 
@@ -36,7 +39,10 @@ void		set_fds(t_server *server)
 	{
 	  FD_SET(i, &server->fd_read);
 	  if (server->e.msg[i].is_empty == false)
-	    FD_SET(i, &server->fd_write);
+	    {
+	      printf("i -> %d queue -> %s\n", i, server->e.msg[i].queue[0]);
+	      FD_SET(i, &server->fd_write);
+	    }
 	  server->fd_max = i;
 	}
       i++;

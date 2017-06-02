@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Mon May 29 22:36:51 2017 Thomas LE MOULLEC
+** Last update Thu Jun  1 20:21:40 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -18,7 +18,10 @@ void			server_read(t_env *e, int fd)
 
 void			server_write(t_env *e, int fd)
 {
-  dprintf(fd, "Here is a message !\n");
+  printf("%d\n", fd);
+  if (write(fd, "a", 1) == -1)
+    printf("write fail\n");
+  //dprintf(fd, "Here is a message !\n");
 }
 
 void			add_server(t_env *e)
@@ -27,11 +30,15 @@ void			add_server(t_env *e)
   struct sockaddr_in	sin;
 
   if ((s = socket(PF_INET, SOCK_STREAM, 0)) == -1)
-    exit(ERROR);
+    {
+      printf("Socket error\n");
+      exit(ERROR);
+    }
   sin.sin_family = AF_INET;
   sin.sin_port = htons(e->port);
   sin.sin_addr.s_addr = INADDR_ANY;
-  bind(s, (struct sockaddr*)&sin, sizeof(sin));
+  if (bind(s, (struct sockaddr*)&sin, sizeof(sin)) == -1)
+    printf("Cannot bind\n");
   listen(s, MAX_FD);
   e->fd_type[s] = FD_SERVER;
   e->fct_read[s] = server_read;
@@ -46,9 +53,15 @@ void			get_order(t_server *server)
   while (i < MAX_FD)
     {
       if (FD_ISSET(i, &server->fd_read))
-	server->e.fct_read[i](&server->e, i);
+	{
+	  server->e.fct_read[i](&server->e, i);
+	}
       if (FD_ISSET(i, &server->fd_write))
-	server->e.fct_write[i](&server->e, i);
+	{
+	  printf("On write, i vaut %d\n", i);
+	  server->e.fct_write[i](&server->e, i);
+	  printf("Fin du write\n");
+	}
       i++;
     }
 }
@@ -65,8 +78,10 @@ void			run_server(t_server *server)
       server->fd_max = 0;
       set_fds(server);
       if (select(server->fd_max + 1, &server->fd_read, NULL, NULL, &server->tv) == -1)
-	perror("select");
+	{
+	  printf("ECHEC\n");
+	  // perror("select");
+	}
       get_order(server);
-      printf("waiting...\n");
     }
 }

@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Mon May 29 22:42:33 2017 Thomas LE MOULLEC
+** Last update Thu Jun  1 19:32:02 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -37,13 +37,10 @@
 typedef enum
   {
     false,
-        true
+    true
   } bool;
 
 typedef void(*fct)();
-
-struct			s_chan;
-struct  		s_user;
 
 typedef struct		s_msg
 {
@@ -63,14 +60,15 @@ typedef struct		s_env
 typedef struct		s_user
 {
   char			*nickname;
+  char			chans[MAX_FD];
   int			fd;
-  struct s_chan		chans[MAX_FD];
 }			t_user;
 
 typedef struct		s_chan
 {
   char			*name;
-  struct s_user		users[MAX_FD];
+  char			users[MAX_FD];
+  //  t_user		users[MAX_FD];
 }	 		t_chan;
 
 typedef struct		s_server

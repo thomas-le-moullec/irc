@@ -5,14 +5,14 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sun May 28 14:15:02 2017 Leo Le Diouron
-## Last update Mon May 29 22:06:25 2017 Thomas LE MOULLEC
+## Last update Thu Jun  1 19:51:30 2017 Leo Le Diouron
 ##
 
 NAME_SERVER		=		server
 
 NAME_CLIENT		=		client
 
-CC			=		gcc
+CC			=		gcc -g
 
 RM			=		rm -rf
 
