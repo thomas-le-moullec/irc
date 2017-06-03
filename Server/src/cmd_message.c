@@ -5,10 +5,18 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:33:49 2017 Leo Le Diouron
-** Last update Sat Jun  3 10:52:57 2017 Leo Le Diouron
+** Last update Sat Jun  3 10:54:33 2017 Leo Le Diouron
 */
 
 #include "server.h"
+
+bool	receive_file(t_server *server, char *message, int fd_client)
+{
+  (void)server;
+  (void)params;
+  (void)fd_client;
+  return (true);
+}
 
 bool	send_message_all_users(t_server *server, char *message, int fd_client)
 {
