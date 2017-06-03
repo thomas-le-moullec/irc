@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:23:04 2017 Leo Le Diouron
-** Last update Sat Jun  3 11:04:34 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 11:34:11 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -15,6 +15,7 @@ bool	connection(t_server *server, char **params, int fd_client)
   int	i;
 
   i = 0;
+  printf("HERE WE ARE IN nick fUNCTION\n");
   if (params[1] == NULL || strlen(params[1]) > 64)
     return (false);
   while (params[1][i] != '\0')

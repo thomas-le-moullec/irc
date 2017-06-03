@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 11:31:13 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:39:05 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -33,14 +33,14 @@
 #define SIZE_USERNAME 64
 #define MAX_CHAR 512
 
-#define NICK "/nick"
-#define LIST "/list"
-#define JOIN "/join"
-#define PART "/part"
-#define USERS "/users"
-#define NAMES "/names"
-#define MSG "/msg"
-#define ACCEPT "accept_file"
+#define NICK "NICK"
+#define LIST "LIST"
+#define JOIN "JOIN"
+#define PART "PART"
+#define USERS "USERS"
+#define NAMES "NAMES"
+#define MSG "MSG"
+#define ACCEPT "ACCEPT_FILE"
 
 #define NBR_CMD 8
 
