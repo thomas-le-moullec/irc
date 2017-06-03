@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 09:34:55 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:45:32 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -21,6 +21,7 @@ void			server_write(t_server *server, int fd)
   printf("%d\n", fd);
   if (write(fd, "a", 1) == -1)
     printf("write fail\n");
+  //inutile pour le moment.
 }
 
 void			add_server(t_server *server)
