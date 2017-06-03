@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:00:10 2017 Leo Le Diouron
-** Last update Sat Jun  3 11:10:31 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 13:13:24 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -21,8 +21,10 @@ bool	list_channel(t_server *server, char **params, int fd_client)
       if ((params[1] == NULL) ||
 	  (params[1] != NULL &&
 	   strstr(server->chans[i].name, params[1]) != NULL))
-	if (server->chans[i].name[0] != '\0')
-	  printf("channel : %s", server->chans[i].name);
+	{
+	  if (server->chans[i].name[0] != '\0')
+	    printf("channel : %s\n", server->chans[i].name);
+	}
       i++;
     }
   return (true);
@@ -38,7 +40,7 @@ bool	list_users(t_server *server, char **params, int fd_client)
   while (i < MAX_FD)
     {
       if (server->users[i].nickname[0] != '\0')
-	printf("users : %s", server->users[i].nickname);
+	printf("users : %s\n", server->users[i].nickname);
       i++;
     }
   return (true);

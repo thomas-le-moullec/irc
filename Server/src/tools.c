@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:47:46 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 11:28:52 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:25:40 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -18,13 +18,20 @@ void		*free_tab(char **tab)
   if (tab != NULL)
     {
       while (tab[y] != NULL)
-	{
-	  free(tab[y]);
-	  y++;
-	}
+	free(tab[y++]);
       free(tab);
     }
   return (NULL);
+}
+
+char		**initialise_tab(char *str)
+{
+  char		**tab;
+
+  tab = NULL;
+  if ((tab = malloc(sizeof(char *) * (strlen(str) + 1))) == NULL)
+    exit(ERROR);
+  return (tab);
 }
 
 char            **my_str_to_wordtab(char *str, char c)
@@ -34,24 +41,23 @@ char            **my_str_to_wordtab(char *str, char c)
   int           y;
   char          **tab;
 
-  y = 0;
+  y = -1;
   i = 0;
-  tab = NULL;
-  tab = malloc(sizeof(char *) * (strlen(str) + 1));
+  tab = initialise_tab(str);
   while (str[i] != '\0')
     {
       x = 0;
       while (str[i] == c)
 	i++;
-      tab[y] = NULL;
-      tab[y] = malloc(sizeof(char) * (strlen(str) + 1));
+      tab[++y] = NULL;
+      if ((tab[y] = malloc(sizeof(char) * (strlen(str) + 1))) == NULL)
+	exit(ERROR);
       while (str[i] != '\0' && str[i] != c)
 	tab[y][x++] = str[i++];
       tab[y][x] = '\0';
-      y++;
       if (str[i] != '\0')
 	i++;
     }
-  tab[y] = NULL;
+  tab[++y] = NULL;
   return (tab);
 }

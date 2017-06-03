@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:33:49 2017 Leo Le Diouron
-** Last update Sat Jun  3 11:26:43 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:02:32 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -36,6 +36,7 @@ bool	send_message_all_users(t_server *server, char *message, int fd_client)
 	      while (message[k] != '\0')
 		{
 		  server->e.msg[i].queue[0][k] = message[k];
+		  server->e.msg[i].is_empty = false;
 		  k++;
 		}
 	    i++;
@@ -53,7 +54,7 @@ bool	send_message_spe_user(t_server *server, char **params, int fd_client)
   i = 0;
   j = 0;
   (void)fd_client;
-  while (i < MAX_FD && strcmp(server->users[i].nickname, params[1]) == 0)
+  while (i < MAX_FD && strcmp(server->users[i].nickname, params[1]) != 0)
     i++;
   if (i == MAX_FD)
     return (false);
@@ -62,6 +63,7 @@ bool	send_message_spe_user(t_server *server, char **params, int fd_client)
       server->e.msg[i].queue[0][j] = params[2][j];
       j++;
     }
+  server->e.msg[i].is_empty = false;
   return (true);
 }
 
@@ -78,6 +80,6 @@ bool	send_message(t_server *server, char **params, int fd_client)
   if (params[1] != NULL && params[2] != NULL && params[3] == NULL)
     return (send_message_spe_user(server, params, fd_client));
   if (params[1] != NULL && params[2] != NULL && params[3] != NULL)
-    return(send_file(server, params, fd_client));
+    return (send_file(server, params, fd_client));
   return (false);
 }
