@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 14:40:54 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 15:10:03 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -33,6 +33,8 @@
 #define SIZE_USERNAME 64
 #define MAX_CHAR 512
 
+#define NBR_CMD 8
+
 #define NICK "NICK"
 #define LIST "LIST"
 #define JOIN "JOIN"
@@ -41,8 +43,6 @@
 #define NAMES "NAMES"
 #define MSG "MSG"
 #define ACCEPT "ACCEPT_FILE"
-
-#define NBR_CMD 8
 
 #define SEP1 '\n'
 
@@ -68,12 +68,12 @@ typedef struct		s_env
   fct			fct_read[MAX_FD];
   fct			fct_write[MAX_FD];
   int			port;
-  t_msg			msg[MAX_FD];
 }			t_env;
 
 typedef struct		s_user
 {
-  char			nickname[64];
+  char			nickname[SIZE_USERNAME];
+  t_msg			msg;
 }			t_user;
 
 typedef struct		s_chan
