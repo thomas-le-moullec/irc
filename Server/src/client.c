@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 11:30:18 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:10:09 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -13,51 +13,60 @@
 
 void		client_write(t_server *server, int fd)
 {
-  printf("%d\n", fd);
-  if (write(fd, "a", 1) == -1)
+  int		i;
+
+  i = 0;
+  if (write(fd, server->e.msg[fd].queue[0],
+	    strlen(server->e.msg[fd].queue[0])) == -1)
     printf("write fail\n");
+  while (i < MAX_CHAR)
+    {
+      server->e.msg[fd].queue[0][i] = 0;
+      i++;
+    }
   server->e.msg[fd].is_empty = true;
-  // Réponse aux server.
+}
+
+int		parse_cmd(t_server *server, int fd, char *line)
+{
+  int		i;
+  char		**cmd;
+
+  i = 0;
+  cmd = my_str_to_wordtab(line, ' ');
+  while (i < NBR_CMD)
+    {
+      if (strcmp(orders[i].cmd, cmd[0]) == 0)
+	{
+	  (orders[i].func)(server, cmd, fd);
+	  break ;
+	}
+      i++;
+    }
+  if (i == NBR_CMD)
+    send_message_all_users(server, line, fd);
+  free_tab(cmd);
+  return (0);
 }
 
 void		client_read(t_server *server, int fd)
 {
+  int		i;
   int		r;
   char		buf[512];
-  char		**cmd;
   char		**lines;
-  int		i;
 
+  i = 0;
   r = read(fd, buf, 512);
   if (r > 0)
     {
       buf[r] = '\0';
       if ((lines = get_orders(buf)) == NULL)
 	return ;
-      r = 0;
-      while (lines[r] != NULL)
+      while (lines[i] != NULL)
 	{
-	  i = 0;
-	  if ((cmd = my_str_to_wordtab(lines[r], ' ')) == NULL)
-	    {
-	      free(lines);
-	      return ;
-	    }
-	  while (i < NBR_CMD)
-	    {
-	      if (strcmp(orders[i].cmd, cmd[0]) == 0)
-		{
-		  (orders[i].func)(server, cmd, fd);
-		  break ;
-		}
-	      i++;
-	    }
-	  if (i == NBR_CMD)
-	    send_message_all_users(server, lines[r], fd);
-	  free_tab(cmd);
-	  //if on a rien trouvé ; go $message
-	  // faire les free
-	  r++;
+	  parse_cmd(server, fd, lines[i]);
+	  i++;
 	}
       free_tab(lines);
     }

@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 14:39:05 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:40:54 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -73,7 +73,7 @@ typedef struct		s_env
 
 typedef struct		s_user
 {
-  char			*nickname;
+  char			nickname[64];
 }			t_user;
 
 typedef struct		s_chan

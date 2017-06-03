@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:31:07 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 11:13:40 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 14:16:58 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -23,7 +23,8 @@ char		*fill_order(char *str, int *i, char c)
   int		x;
 
   order = NULL;
-  order = malloc(sizeof(char) * (strlen(str) - *i + 1));
+  if ((order = malloc(sizeof(char) * (strlen(str) - *i + 1))) == NULL)
+    exit(ERROR);
   x = 0;
   while (str[*i] != '\0' && str[*i] != c)
     order[x++] = str[(*i)++];
@@ -46,7 +47,8 @@ char            **get_orders(char *str)
   i = 0;
   y = 0;
   tab = NULL;
-  tab = malloc(sizeof(char *) * (strlen(str) + 1));
+  if ((tab = malloc(sizeof(char *) * (strlen(str) + 1))) == NULL)
+      exit(ERROR);
   while (str[i] != '\0')
     {
       tab[y] = NULL;
