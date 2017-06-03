@@ -5,7 +5,7 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sun May 28 14:15:02 2017 Leo Le Diouron
-## Last update Thu Jun  1 19:51:30 2017 Leo Le Diouron
+## Last update Sat Jun  3 10:48:57 2017 Thomas LE MOULLEC
 ##
 
 NAME_SERVER		=		server
@@ -24,6 +24,8 @@ SRCS_SERVER		=		$(PATH_SERVER)main.c			\
 					$(PATH_SERVER)initialisation.c		\
 					$(PATH_SERVER)server.c			\
 					$(PATH_SERVER)client.c			\
+					$(PATH_SERVER)orders.c			\
+					$(PATH_SERVER)tools.c			\
 
 SRCS_CLIENT		=		$(PATH_CLIENT)main.c			\
 					$(PATH_CLIENT)run_client.c		\

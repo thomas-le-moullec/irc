@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 09:43:44 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 10:50:11 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -32,6 +32,19 @@
 #define SIZE_MSG 10
 #define SIZE_USERNAME 64
 #define MAX_CHAR 512
+
+#define NICK "/nick"
+#define LIST "/list"
+#define JOIN "/join"
+#define PART "/part"
+#define USERS "/users"
+#define NAMES "/names"
+#define MSG "/msg"
+#define ACCEPT "accept_file"
+
+#define NBR_CMD 8
+
+#define SEP1 '\n'
 
 #define LOCALHOST "127.0.0.1"
 
@@ -82,6 +95,33 @@ typedef struct		s_server
   fd_set		fd_write;
 }			t_server;
 
+typedef struct		s_orders
+{
+  char			*order;
+  bool			(*func)(t_server *, char **, int);
+}			t_orders;
+
+bool		connection(t_server *, char **, int);
+bool		list_channel(t_server *, char **, int);
+bool		list_users(t_server *, char **, int);
+bool		list_users_in_channel(t_server *, char **, int);
+bool		join_channel(t_server *, char **, int);
+bool		leave_channel(t_server *, char **, int);
+bool		send_message(t_server *, char **, int);
+bool		receive_file(t_server *, char **, int);
+
+t_orders                     orders[] =
+  {
+    {NICK, &connection},
+    {LIST, &list_channel},
+    {USERS, &list_users},
+    {NAMES, &list_users_in_channel},
+    {JOIN, &join_channel},
+    {PART, &leave_channel},
+    {MSG, &send_message},
+    {ACCEPT, &receive_file},
+  };
+
 t_user		*add_user(t_user *, char *, int, t_chan *);
 t_chan		*add_channel(t_chan *, char *, t_user *);
 void            initialise_server(t_server *, char *);
@@ -92,5 +132,9 @@ void		add_client(t_server *, int);
 void            server_read(t_server *, int);
 void            server_write(t_server *, int);
 void            client_read(t_server *, int);
+char		**get_orders(char *);
+char		*fill_order(char *, int, char);
+int		loop_on_char(char *, int, char);
+void		*free_tab(char **);
 
 #endif

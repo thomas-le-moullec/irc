@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 09:51:52 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 10:49:28 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -22,15 +22,22 @@ void		client_write(t_server *server, int fd)
 void		client_read(t_server *server, int fd)
 {
   int		r;
-  int		j;
-  char		buf[4096];
+  char		buf[512];
+  char		**orders;
 
   r = read(fd, buf, 512);
-  j = 0;
   if (r > 0)
     {
       buf[r] = '\0';
-      // exec_order(buf, server, fd);
+      if ((orders = get_orders(buf)) == NULL)
+	return ;
+      r = 0;
+      while (orders[r] != NULL)
+	{
+	  //	exec_order(orders[r++], server, fd);
+	  printf("order get =>---%s---\n", orders[r++]);
+	}
+      free_tab(orders);
     }
   else
     {
