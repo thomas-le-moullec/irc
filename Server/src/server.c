@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 09:45:32 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 11:07:03 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -18,6 +18,8 @@ void			server_read(t_server *server, int fd)
 
 void			server_write(t_server *server, int fd)
 {
+  (void)fd;
+  (void)server;
   printf("%d\n", fd);
   if (write(fd, "a", 1) == -1)
     printf("write fail\n");

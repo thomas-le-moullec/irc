@@ -5,10 +5,11 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 10:49:28 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 11:30:18 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
+#include "orders.h"
 
 void		client_write(t_server *server, int fd)
 {
@@ -23,21 +24,42 @@ void		client_read(t_server *server, int fd)
 {
   int		r;
   char		buf[512];
-  char		**orders;
+  char		**cmd;
+  char		**lines;
+  int		i;
 
   r = read(fd, buf, 512);
   if (r > 0)
     {
       buf[r] = '\0';
-      if ((orders = get_orders(buf)) == NULL)
+      if ((lines = get_orders(buf)) == NULL)
 	return ;
       r = 0;
-      while (orders[r] != NULL)
+      while (lines[r] != NULL)
 	{
-	  //	exec_order(orders[r++], server, fd);
-	  printf("order get =>---%s---\n", orders[r++]);
+	  i = 0;
+	  if ((cmd = my_str_to_wordtab(lines[r], ' ')) == NULL)
+	    {
+	      free(lines);
+	      return ;
+	    }
+	  while (i < NBR_CMD)
+	    {
+	      if (strcmp(orders[i].cmd, cmd[0]) == 0)
+		{
+		  (orders[i].func)(server, cmd, fd);
+		  break ;
+		}
+	      i++;
+	    }
+	  if (i == NBR_CMD)
+	    send_message_all_users(server, lines[r], fd);
+	  free_tab(cmd);
+	  //if on a rien trouvé ; go $message
+	  // faire les free
+	  r++;
 	}
-      free_tab(orders);
+      free_tab(lines);
     }
   else
     {

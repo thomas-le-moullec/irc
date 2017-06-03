@@ -5,12 +5,12 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:00:10 2017 Leo Le Diouron
-** Last update Sat Jun  3 10:21:46 2017 Leo Le Diouron
+** Last update Sat Jun  3 11:10:31 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
 
-bool	list_channels(t_server *server, char **params, int fd_client)
+bool	list_channel(t_server *server, char **params, int fd_client)
 {
   int	i;
 
@@ -52,7 +52,7 @@ bool	list_users_in_channel(t_server *server, char **params, int fd_client)
   (void)fd_client;
   i = 0;
   j = 0;
-  while (j < MAX_FD && strcmp(server->chans[j].nickname, params[1]) != 0)
+  while (j < MAX_FD && strcmp(server->chans[j].name, params[1]) != 0)
     j++;
   if (j == MAX_FD)
     return (false);

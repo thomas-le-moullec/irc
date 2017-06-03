@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:31:07 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 10:51:09 2017 Thomas LE MOULLEC
+** Last update Sat Jun  3 11:13:40 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -17,22 +17,23 @@ int             loop_on_char(char *str, int i, char c)
   return (i);
 }
 
-char		*fill_order(char *str, int i, char c)
+char		*fill_order(char *str, int *i, char c)
 {
   char		*order;
   int		x;
 
   order = NULL;
-  order = malloc(sizeof(char) * (strlen(str) - i + 1));
+  order = malloc(sizeof(char) * (strlen(str) - *i + 1));
   x = 0;
-  while (str[i] != '\0' && str[i] != c)
-    order[x++] = str[i++];
+  while (str[*i] != '\0' && str[*i] != c)
+    order[x++] = str[(*i)++];
   order[x] = 0;
-  if (str[i] != c)
+  if (str[*i] != c)
     {
       free(order);
       order = NULL;
     }
+  printf("ORDER => %s\n", order);
   return (order);
 }
 
@@ -50,7 +51,7 @@ char            **get_orders(char *str)
     {
       tab[y] = NULL;
       i = loop_on_char(str, i, SEP1);
-      tab[y] = fill_order(str, i, SEP1);
+      tab[y] = fill_order(str, &i, SEP1);
       if (str[i] != '\0')
 	i++;
       y++;
