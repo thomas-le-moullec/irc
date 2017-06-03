@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:33:49 2017 Leo Le Diouron
-** Last update Sat Jun  3 14:02:32 2017 Leo Le Diouron
+** Last update Sat Jun  3 15:14:01 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -23,6 +23,7 @@ bool	send_message_all_users(t_server *server, char *message, int fd_client)
   int	i;
   int	j;
   int	k;
+  int	l;
 
   j = 0;
   while (j < MAX_FD)
@@ -33,12 +34,18 @@ bool	send_message_all_users(t_server *server, char *message, int fd_client)
 	  {
 	    k = 0;
 	    if (server->chans[j].users[i] == 1 && i != fd_client)
-	      while (message[k] != '\0')
-		{
-		  server->e.msg[i].queue[0][k] = message[k];
-		  server->e.msg[i].is_empty = false;
-		  k++;
-		}
+	      {
+		l = 0;
+		while (l < SIZE_MSG && server->users[i].msg.queue[l][0] != '\0')
+		  l++;
+		if (l != SIZE_MSG)
+		  while (message[k] != '\0')
+		    {
+		      server->users[i].msg.queue[l][k] = message[k];
+		      server->users[i].msg.is_empty = false;
+		      k++;
+		    }
+	      }
 	    i++;
 	  }
       j++;
@@ -50,20 +57,25 @@ bool	send_message_spe_user(t_server *server, char **params, int fd_client)
 {
   int	i;
   int	j;
+  int	k;
 
   i = 0;
   j = 0;
+  k = 0;
   (void)fd_client;
   while (i < MAX_FD && strcmp(server->users[i].nickname, params[1]) != 0)
     i++;
   if (i == MAX_FD)
     return (false);
-  while (params[2][j] != '\0')
-    {
-      server->e.msg[i].queue[0][j] = params[2][j];
-      j++;
-    }
-  server->e.msg[i].is_empty = false;
+  while (k < SIZE_MSG && server->users[i].msg.queue[k][0] != '\0')
+    k++;
+  if (k != SIZE_MSG)
+    while (params[2][j] != '\0')
+      {
+	server->users[i].msg.queue[k][j] = params[2][j];
+	j++;
+      }
+  server->users[i].msg.is_empty = false;
   return (true);
 }
 

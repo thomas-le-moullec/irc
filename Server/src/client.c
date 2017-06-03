@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 14:10:09 2017 Leo Le Diouron
+** Last update Sat Jun  3 15:16:03 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -14,17 +14,22 @@
 void		client_write(t_server *server, int fd)
 {
   int		i;
+  int		j;
 
-  i = 0;
-  if (write(fd, server->e.msg[fd].queue[0],
-	    strlen(server->e.msg[fd].queue[0])) == -1)
-    printf("write fail\n");
-  while (i < MAX_CHAR)
+  j = 0;
+  while (server->users[fd].msg.queue[j][0] != '\0')
     {
-      server->e.msg[fd].queue[0][i] = 0;
-      i++;
+      i = 0;
+      if (write(fd, server->users[fd].msg.queue[j],
+		strlen(server->users[fd].msg.queue[j])) == -1)
+	printf("write fail\n");
+      while (i < MAX_CHAR)
+	{
+	  server->users[fd].msg.queue[j][i] = 0;
+	  i++;
+	}
     }
-  server->e.msg[fd].is_empty = true;
+  server->users[fd].msg.is_empty = true;
 }
 
 int		parse_cmd(t_server *server, int fd, char *line)
@@ -89,5 +94,4 @@ void			add_client(t_server *server, int s)
   server->e.fd_type[cs] = FD_CLIENT;
   server->e.fct_read[cs] = client_read;
   server->e.fct_write[cs] = client_write;
-  printf("cs : %d\n", cs);
 }
