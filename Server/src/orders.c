@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:31:07 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 14:16:58 2017 Leo Le Diouron
+** Last update Sat Jun  3 17:42:58 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -34,7 +34,7 @@ char		*fill_order(char *str, int *i, char c)
       free(order);
       order = NULL;
     }
-  printf("ORDER => %s\n", order);
+  //  printf("ORDER => %s\n", order);
   return (order);
 }
 
