@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 09:35:44 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:43:44 2017 Thomas LE MOULLEC
 */
 
 #ifndef SERVER_H_
@@ -29,7 +29,8 @@
 #define ERROR 84
 
 #define MAX_FD 255
-#define MAX_MSG 10
+#define SIZE_MSG 10
+#define SIZE_USERNAME 64
 #define MAX_CHAR 512
 
 #define LOCALHOST "127.0.0.1"
@@ -44,7 +45,7 @@ typedef void(*fct)();
 
 typedef struct		s_msg
 {
-  char			queue[MAX_MSG][MAX_CHAR];
+  char			queue[SIZE_MSG][MAX_CHAR];
   bool			is_empty;
 }			t_msg;
 
@@ -64,7 +65,7 @@ typedef struct		s_user
 
 typedef struct		s_chan
 {
-  char			*name;
+  char			name[SIZE_USERNAME];
   char			users[MAX_FD];
 }	 		t_chan;
 

@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:33:40 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 09:20:19 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:49:18 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -21,6 +21,7 @@ void		initialise_server(t_server *server, char *port)
   server->tv.tv_sec = 20;
   server->tv.tv_usec = 0;
   FD_ZERO(&server->fd_read);
+  FD_ZERO(&server->fd_write);
   memset(server->e.fd_type, 0, MAX_FD);
   memset(server->e.msg, 0, MAX_FD * sizeof(t_msg));
   while (i < MAX_FD)
@@ -42,7 +43,7 @@ void		set_fds(t_server *server)
 	  FD_SET(i, &server->fd_read);
 	  if (server->e.msg[i].is_empty == false)
 	    {
-	      printf("i -> %d queue -> %s\n", i, server->e.msg[i].queue[0]);
+	      //	      printf("i -> %d queue -> %s\n", i, server->e.msg[i].queue[0]);
 	      FD_SET(i, &server->fd_write);
 	    }
 	  server->fd_max = i;

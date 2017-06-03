@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 09:36:58 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:51:52 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -16,6 +16,7 @@ void		client_write(t_server *server, int fd)
   if (write(fd, "a", 1) == -1)
     printf("write fail\n");
   server->e.msg[fd].is_empty = true;
+  // Réponse aux server.
 }
 
 void		client_read(t_server *server, int fd)
