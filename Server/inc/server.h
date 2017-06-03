@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Thu Jun  1 19:32:02 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:35:44 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -60,21 +60,18 @@ typedef struct		s_env
 typedef struct		s_user
 {
   char			*nickname;
-  char			chans[MAX_FD];
-  int			fd;
 }			t_user;
 
 typedef struct		s_chan
 {
   char			*name;
   char			users[MAX_FD];
-  //  t_user		users[MAX_FD];
 }	 		t_chan;
 
 typedef struct		s_server
 {
   int			fd_max;
-  t_chan		chan[MAX_FD];
+  t_chan		chans[MAX_FD];
   t_user		users[MAX_FD];
   int			fd;
   char			*ip;
@@ -89,10 +86,10 @@ t_chan		*add_channel(t_chan *, char *, t_user *);
 void            initialise_server(t_server *, char *);
 void            set_fds(t_server *);
 void            run_server(t_server *);
-void            add_server(t_env *);
-void		add_client(t_env *, int);
-void            server_read(t_env *, int);
-void            server_write(t_env *, int);
-void            client_read(t_env *, int);
+void            add_server(t_server *);
+void		add_client(t_server *, int);
+void            server_read(t_server *, int);
+void            server_write(t_server *, int);
+void            client_read(t_server *, int);
 
 #endif

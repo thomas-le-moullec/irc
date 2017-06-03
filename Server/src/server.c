@@ -5,26 +5,25 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Thu Jun  1 20:21:40 2017 Leo Le Diouron
+** Last update Sat Jun  3 09:34:55 2017 Leo Le Diouron
 */
 
 #include "server.h"
 
-void			server_read(t_env *e, int fd)
+void			server_read(t_server *server, int fd)
 {
   printf("New client\n");
-  add_client(e, fd);
+  add_client(server, fd);
 }
 
-void			server_write(t_env *e, int fd)
+void			server_write(t_server *server, int fd)
 {
   printf("%d\n", fd);
   if (write(fd, "a", 1) == -1)
     printf("write fail\n");
-  //dprintf(fd, "Here is a message !\n");
 }
 
-void			add_server(t_env *e)
+void			add_server(t_server *server)
 {
   int			s;
   struct sockaddr_in	sin;
@@ -35,14 +34,14 @@ void			add_server(t_env *e)
       exit(ERROR);
     }
   sin.sin_family = AF_INET;
-  sin.sin_port = htons(e->port);
+  sin.sin_port = htons(server->e.port);
   sin.sin_addr.s_addr = INADDR_ANY;
   if (bind(s, (struct sockaddr*)&sin, sizeof(sin)) == -1)
     printf("Cannot bind\n");
   listen(s, MAX_FD);
-  e->fd_type[s] = FD_SERVER;
-  e->fct_read[s] = server_read;
-  e->fct_write[s] = server_write;
+  server->e.fd_type[s] = FD_SERVER;
+  server->e.fct_read[s] = server_read;
+  server->e.fct_write[s] = server_write;
 }
 
 void			get_order(t_server *server)
@@ -54,12 +53,12 @@ void			get_order(t_server *server)
     {
       if (FD_ISSET(i, &server->fd_read))
 	{
-	  server->e.fct_read[i](&server->e, i);
+	  server->e.fct_read[i](server, i);
 	}
       if (FD_ISSET(i, &server->fd_write))
 	{
 	  printf("On write, i vaut %d\n", i);
-	  server->e.fct_write[i](&server->e, i);
+	  server->e.fct_write[i](server, i);
 	  printf("Fin du write\n");
 	}
       i++;
