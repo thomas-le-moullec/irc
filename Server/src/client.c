@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 15:16:03 2017 Leo Le Diouron
+** Last update Sat Jun  3 17:47:35 2017 Thomas LE MOULLEC
 */
 
 #include "server.h"
@@ -39,6 +39,8 @@ int		parse_cmd(t_server *server, int fd, char *line)
 
   i = 0;
   cmd = my_str_to_wordtab(line, ' ');
+  if (strcmp("QUIT", cmd[0]) == 0)
+    close(fd);
   while (i < NBR_CMD)
     {
       if (strcmp(orders[i].cmd, cmd[0]) == 0)
@@ -70,6 +72,7 @@ void		client_read(t_server *server, int fd)
 	return ;
       while (lines[i] != NULL)
 	{
+	  dprintf(fd, "001 Welcome !\r\n");
 	  parse_cmd(server, fd, lines[i]);
 	  i++;
 	}
