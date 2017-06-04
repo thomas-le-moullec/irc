@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:00:10 2017 Leo Le Diouron
-** Last update Sat Jun  3 13:13:24 2017 Leo Le Diouron
+** Last update Sat Jun  3 16:53:40 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -14,7 +14,6 @@ bool	list_channel(t_server *server, char **params, int fd_client)
 {
   int	i;
 
-  (void)fd_client;
   i = 0;
   while (i < MAX_FD)
     {
@@ -23,7 +22,7 @@ bool	list_channel(t_server *server, char **params, int fd_client)
 	   strstr(server->chans[i].name, params[1]) != NULL))
 	{
 	  if (server->chans[i].name[0] != '\0')
-	    printf("channel : %s\n", server->chans[i].name);
+	    dprintf(fd_client, "%s\n", server->chans[i].name);
 	}
       i++;
     }
@@ -35,12 +34,11 @@ bool	list_users(t_server *server, char **params, int fd_client)
   int   i;
 
   (void)params;
-  (void)fd_client;
   i = 0;
   while (i < MAX_FD)
     {
       if (server->users[i].nickname[0] != '\0')
-	printf("users : %s\n", server->users[i].nickname);
+	dprintf(fd_client, "%s\n", server->users[i].nickname);
       i++;
     }
   return (true);
@@ -51,7 +49,6 @@ bool	list_users_in_channel(t_server *server, char **params, int fd_client)
   int	i;
   int	j;
 
-  (void)fd_client;
   i = 0;
   j = 0;
   while (j < MAX_FD && strcmp(server->chans[j].name, params[1]) != 0)
@@ -61,7 +58,7 @@ bool	list_users_in_channel(t_server *server, char **params, int fd_client)
   while (i < MAX_FD)
     {
       if (server->chans[j].users[i] == 1)
-	printf("users in channel : %s\n", server->users[i].nickname);
+	dprintf(fd_client, "%s\n", server->users[i].nickname);
       i++;
     }
   return (true);
