@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun Jun  4 09:51:46 2017 Leo Le Diouron
-** Last update Sun Jun  4 10:34:12 2017 Leo Le Diouron
+** Last update Mon Jun  5 10:53:17 2017 Leo Le Diouron
 */
 
 #ifndef CLIENT_H_
@@ -64,5 +64,5 @@ void                    add_server(t_client *, char **);
 void			initialise_client(t_client *);
 void			set_fds(t_client *);
 void                    add_client(t_client *);
-
+char			**my_str_to_wordtab(char *, char);
 #endif

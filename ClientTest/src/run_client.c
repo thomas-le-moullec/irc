@@ -5,15 +5,18 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun Jun  4 09:59:18 2017 Leo Le Diouron
-** Last update Sun Jun  4 10:48:47 2017 Leo Le Diouron
+** Last update Mon Jun  5 11:05:52 2017 Leo Le Diouron
 */
 
 #include "client.h"
 
 void			server_read(t_client *client)
 {
+  char			buf[512];
+
   (void)client;
-  printf("reading server !\n");
+  read(client->fd, buf, 512);
+  printf("reading server : %s!\n", buf);
 }
 
 void			server_write(t_client *client)
