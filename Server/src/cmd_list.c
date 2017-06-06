@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:00:10 2017 Leo Le Diouron
-** Last update Sat Jun  3 16:53:40 2017 Leo Le Diouron
+** Last update Mon Jun  5 22:54:17 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -15,6 +15,7 @@ bool	list_channel(t_server *server, char **params, int fd_client)
   int	i;
 
   i = 0;
+  dprintf(fd_client, "321 begin of channels\r\n");
   while (i < MAX_FD)
     {
       if ((params[1] == NULL) ||
@@ -22,10 +23,11 @@ bool	list_channel(t_server *server, char **params, int fd_client)
 	   strstr(server->chans[i].name, params[1]) != NULL))
 	{
 	  if (server->chans[i].name[0] != '\0')
-	    dprintf(fd_client, "%s\n", server->chans[i].name);
+	    dprintf(fd_client, "322 %s\n", server->chans[i].name);
 	}
       i++;
     }
+  dprintf(fd_client, "323 begin of channels\r\n");
   return (true);
 }
 

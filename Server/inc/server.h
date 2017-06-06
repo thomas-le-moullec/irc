@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sat Jun  3 15:10:03 2017 Leo Le Diouron
+** Last update Mon Jun  5 22:38:38 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -33,7 +33,7 @@
 #define SIZE_USERNAME 64
 #define MAX_CHAR 512
 
-#define NBR_CMD 8
+#define NBR_CMD 9
 
 #define NICK "NICK"
 #define LIST "LIST"
@@ -43,6 +43,9 @@
 #define NAMES "NAMES"
 #define MSG "MSG"
 #define ACCEPT "ACCEPT_FILE"
+#define QUIT "QUIT"
+
+#define WELCOME "001 Welcome\r\n"
 
 #define SEP1 '\n'
 
@@ -117,5 +120,6 @@ int		loop_on_char(char *, int, char);
 void		*free_tab(char **);
 bool		send_message_all_users(t_server *, char *, int);
 char		**my_str_to_wordtab(char *, char);
+void		fill_queue(t_server *, int, char *);
 
 #endif
