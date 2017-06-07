@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Mon Jun  5 22:14:18 2017 Leo Le Diouron
+** Last update Wed Jun  7 22:23:17 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -29,14 +29,14 @@ void			add_server(t_server *server)
 
   if ((s = socket(PF_INET, SOCK_STREAM, 0)) == -1)
     {
-      printf("Socket error\n");
+      printf(SOCKET_ERROR);
       exit(ERROR);
     }
   sin.sin_family = AF_INET;
   sin.sin_port = htons(server->e.port);
   sin.sin_addr.s_addr = INADDR_ANY;
   if (bind(s, (struct sockaddr*)&sin, sizeof(sin)) == -1)
-    printf("Cannot bind\n");
+    printf(CANNOT_BIND);
   listen(s, MAX_FD);
   server->e.fd_type[s] = FD_SERVER;
   server->e.fct_read[s] = server_read;

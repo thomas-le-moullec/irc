@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Mon Jun  5 21:46:49 2017 Leo Le Diouron
-** Last update Mon Jun  5 22:15:24 2017 Leo Le Diouron
+** Last update Wed Jun  7 22:30:32 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -18,6 +18,7 @@ bool	quit(t_server *server, char **params, int fd_client)
   i = 0;
   while (i < SIZE_USERNAME)
     server->users[fd_client].nickname[i++] = 0;
+  server->users[fd_client].is_activated = false;
   i = 0;
   while (i < MAX_FD)
     server->chans[i++].users[fd_client] = 0;

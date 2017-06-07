@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Mon Jun  5 22:38:38 2017 Leo Le Diouron
+** Last update Wed Jun  7 22:30:40 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -33,19 +33,32 @@
 #define SIZE_USERNAME 64
 #define MAX_CHAR 512
 
-#define NBR_CMD 9
+#define NBR_CMD 11
 
 #define NICK "NICK"
+#define USER "USER"
 #define LIST "LIST"
 #define JOIN "JOIN"
 #define PART "PART"
 #define USERS "USERS"
 #define NAMES "NAMES"
 #define MSG "MSG"
+#define PRIVMSG "PRIVMSG"
 #define ACCEPT "ACCEPT_FILE"
 #define QUIT "QUIT"
 
 #define WELCOME "001 Welcome\r\n"
+#define TOPIC "332 Topic\r\n"
+#define CHAN_BEGIN "321 begin of channels\r\n"
+#define CHAN_END "323 end of channels\r\n"
+#define LIST_BEGIN "392 begin of users\r\n"
+#define LIST_NO_USER "394 no users\r\n"
+#define LIST_END "395 end of users\r\n"
+#define NAMES_END "366 end of names\r\n"
+#define PRIVMSG_NO_USER "301 User doesn't exist\r\n"
+
+#define SOCKET_ERROR "Socket error\n"
+#define CANNOT_BIND "Cannot bind\n"
 
 #define SEP1 '\n'
 
@@ -77,6 +90,7 @@ typedef struct		s_user
 {
   char			nickname[SIZE_USERNAME];
   t_msg			msg;
+  bool			is_activated;
 }			t_user;
 
 typedef struct		s_chan

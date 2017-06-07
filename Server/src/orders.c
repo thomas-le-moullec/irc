@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:31:07 2017 Thomas LE MOULLEC
-** Last update Mon Jun  5 22:02:39 2017 Leo Le Diouron
+** Last update Wed Jun  7 22:33:23 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -28,7 +28,10 @@ char		*fill_order(char *str, int *i, char c)
   x = 0;
   while (str[*i] != '\0' && str[*i] != c)
     order[x++] = str[(*i)++];
-  order[x] = 0;
+  if (x > 0 && order[x - 1] == '\r')
+    order[x - 1] = 0;
+  else
+    order[x] = 0;
   if (str[*i] != c)
     {
       free(order);

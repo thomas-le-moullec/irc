@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:33:49 2017 Leo Le Diouron
-** Last update Mon Jun  5 21:17:01 2017 Leo Le Diouron
+** Last update Wed Jun  7 22:19:51 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -48,7 +48,10 @@ bool	send_message_spe_user(t_server *server, char **params, int fd_client)
   while (i < MAX_FD && strcmp(server->users[i].nickname, params[1]) != 0)
     i++;
   if (i == MAX_FD)
-    return (false);
+    {
+      dprintf(fd_client, PRIVMSG_NO_USER);
+      return (false);
+    }
   fill_queue(server, i, params[2]);
   return (true);
 }
