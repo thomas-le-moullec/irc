@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:41:53 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 14:02:08 2017 Leo Le Diouron
+** Last update Mon Jun  5 22:14:18 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -50,9 +50,9 @@ void			get_order(t_server *server)
   i = 0;
   while (i < MAX_FD)
     {
-      if (FD_ISSET(i, &server->fd_read))
+      if (FD_ISSET(i, &server->fd_read) && server->e.fd_type[i] != FD_FREE)
 	server->e.fct_read[i](server, i);
-      if (FD_ISSET(i, &server->fd_write))
+      if (FD_ISSET(i, &server->fd_write) && server->e.fd_type[i] != FD_FREE)
 	server->e.fct_write[i](server, i);
       i++;
     }

@@ -5,7 +5,7 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sun May 28 14:15:02 2017 Leo Le Diouron
-## Last update Sat Jun  3 10:57:22 2017 Thomas LE MOULLEC
+## Last update Mon Jun  5 21:53:50 2017 Leo Le Diouron
 ##
 
 NAME_SERVER		=		server
@@ -18,7 +18,7 @@ RM			=		rm -rf
 
 PATH_SERVER		=		./Server/src/
 
-PATH_CLIENT		=		./Client/src/
+PATH_CLIENT		=		./ClientTest/src/
 
 SRCS_SERVER		=		$(PATH_SERVER)main.c			\
 					$(PATH_SERVER)initialisation.c		\
@@ -26,15 +26,17 @@ SRCS_SERVER		=		$(PATH_SERVER)main.c			\
 					$(PATH_SERVER)client.c			\
 					$(PATH_SERVER)orders.c			\
 					$(PATH_SERVER)tools.c			\
+					$(PATH_SERVER)fill_queue.c		\
 					$(PATH_SERVER)cmd_connection.c		\
 					$(PATH_SERVER)cmd_list.c		\
 					$(PATH_SERVER)cmd_message.c		\
+					$(PATH_SERVER)cmd_quit.c		\
 
 SRCS_CLIENT		=		$(PATH_CLIENT)main.c			\
 					$(PATH_CLIENT)run_client.c		\
-					$(PATH_CLIENT)get_order.c		\
-					$(PATH_CLIENT)handle_server.c		\
-					$(PATH_CLIENT)my_str_to_wordtab.c	\
+					$(PATH_CLIENT)add_client.c		\
+					$(PATH_CLIENT)initialisation_client.c	\
+					$(PATH_CLIENT)tools.c			\
 
 OBJS_SERVER		=		$(SRCS_SERVER:.c=.o)
 
@@ -42,7 +44,7 @@ OBJS_CLIENT		=		$(SRCS_CLIENT:.c=.o)
 
 CFLAGS			=		-W -Wall -Wextra $(INC)
 
-INC			=		-I ./Server/inc/ -I ./Client/inc/
+INC			=		-I ./Server/inc/ -I ./ClientTest/inc/
 
 all:					$(NAME_SERVER) $(NAME_CLIENT)
 

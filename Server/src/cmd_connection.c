@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:23:04 2017 Leo Le Diouron
-** Last update Sat Jun  3 15:33:44 2017 Thomas LE MOULLEC
+** Last update Mon Jun  5 22:38:22 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -22,6 +22,7 @@ bool	connection(t_server *server, char **params, int fd_client)
       server->users[fd_client].nickname[i] = params[1][i];
       i++;
     }
+  fill_queue(server, fd_client, WELCOME);
   return (true);
 }
 

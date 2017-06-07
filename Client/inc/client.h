@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat May 27 16:25:29 2017 Thomas LE MOULLEC
-** Last update Sat May 27 18:50:09 2017 Thomas LE MOULLEC
+** Last update Sun Jun  4 10:48:10 2017 Leo Le Diouron
 */
 
 #ifndef CLIENT_H_
@@ -55,5 +55,6 @@ bool		connect_to_server(char **, t_client *);
 bool		send_to_server(char *, int);
 bool            check_params(char **);
 char		**my_str_to_wordtab(char *, char);
+char            **my_str_to_wordtab(char *, char);
 
 #endif
