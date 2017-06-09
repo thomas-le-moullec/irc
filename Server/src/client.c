@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Wed Jun  7 22:21:28 2017 Leo Le Diouron
+** Last update Fri Jun  9 11:04:31 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -39,7 +39,7 @@ int		parse_cmd(t_server *server, int fd, char *line)
 
   i = 0;
   cmd = my_str_to_wordtab(line, ' ');
-  while (i < NBR_CMD)
+  while (cmd[0] != NULL && i < NBR_CMD)
     {
       if (strcmp(orders[i].cmd, cmd[0]) == 0)
 	{

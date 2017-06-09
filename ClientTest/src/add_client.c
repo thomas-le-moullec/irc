@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun Jun  4 10:02:09 2017 Leo Le Diouron
-** Last update Mon Jun  5 11:01:14 2017 Leo Le Diouron
+** Last update Fri Jun  9 10:30:34 2017 Leo Le Diouron
 */
 
 #include "client.h"
@@ -36,8 +36,12 @@ void			client_read(t_client *client)
   r = read(1, buf, 511);
   buf[r] = '\0';
   cmds = my_str_to_wordtab(buf, ' ');
-  if (strcmp(cmds[0], "/Server") == 0)
-    add_server(client, cmds);
+  printf("AAA : [%s]\n", cmds[0]);
+  if (strncmp(cmds[0], "/Server", 7) == 0)
+    {
+      printf("BBB\n");
+      add_server(client, cmds);
+    }
   else
     write(client->fd, modify_cmd(buf), strlen(buf) - 1);
 }

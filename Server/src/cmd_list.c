@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:00:10 2017 Leo Le Diouron
-** Last update Wed Jun  7 22:27:54 2017 Leo Le Diouron
+** Last update Fri Jun  9 11:07:49 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -23,7 +23,9 @@ bool	list_channel(t_server *server, char **params, int fd_client)
 	   strstr(server->chans[i].name, params[1]) != NULL))
 	{
 	  if (server->chans[i].name[0] != '\0')
-	    dprintf(fd_client, "322 %s\r\n", server->chans[i].name);
+	    {
+	      dprintf(fd_client, "322 %s\r\n", server->chans[i].name);
+	    }
 	}
       i++;
     }
