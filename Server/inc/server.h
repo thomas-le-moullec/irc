@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Sun Jun 11 14:43:28 2017 Leo Le Diouron
+** Last update Sun Jun 11 15:08:48 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define FD_FREE	0
 #define FD_CLIENT 1
@@ -137,6 +138,6 @@ bool		send_message_all_users(t_server *, char *, int);
 char		**my_str_to_wordtab(char *, char);
 void		fill_queue(t_server *, int, char *);
 int             parse_cmd(t_server *, int, char *);
-
+char            *upper_str(char *);
 
 #endif

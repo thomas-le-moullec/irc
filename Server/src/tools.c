@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:47:46 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 14:25:40 2017 Leo Le Diouron
+** Last update Sun Jun 11 15:09:04 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -60,4 +60,17 @@ char            **my_str_to_wordtab(char *str, char c)
     }
   tab[++y] = NULL;
   return (tab);
+}
+
+char		*upper_str(char *str)
+{
+  int		i;
+
+  i = 0;
+  while (str[i] != '\0')
+    {
+      str[i] = toupper(str[i]);
+      i++;
+    }
+  return (str);
 }
