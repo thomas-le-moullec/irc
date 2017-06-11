@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 14:33:40 2017 Thomas LE MOULLEC
-** Last update Sat Jun  3 15:12:23 2017 Leo Le Diouron
+** Last update Sun Jun 11 14:16:52 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -26,7 +26,10 @@ void		initialise_server(t_server *server, char *port)
   memset(server->chans, 0, MAX_FD * sizeof(t_chan));
   memset(server->users, 0, MAX_FD * sizeof(t_user));
   while (i < MAX_FD)
-    server->users[i++].msg.is_empty = true;
+    {
+      server->users[i].msg.is_empty = true;
+      server->users[i++].last_chan = -1;
+    }
   add_server(server);
 }
 

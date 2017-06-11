@@ -1,60 +1,68 @@
 /*
-** client.h for client in /home/le-mou_t/rendu/TEK2/C/PSU_2016_myirc
+** client.h for client in /home/le-dio_l/PSU_2016_myirc/ClientTest
 ** 
-** Made by Thomas LE MOULLEC
-** Login   <le-mou_t@epitech.net>
+** Made by Leo Le Diouron
+** Login   <le-dio_l@epitech.net>
 ** 
-** Started on  Sat May 27 16:25:29 2017 Thomas LE MOULLEC
-** Last update Sun Jun  4 10:48:10 2017 Leo Le Diouron
+** Started on  Sun Jun  4 09:51:46 2017 Leo Le Diouron
+** Last update Mon Jun  5 10:53:17 2017 Leo Le Diouron
 */
 
 #ifndef CLIENT_H_
-# define CLIENT_H_
+#define CLIENT_H_
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <ctype.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <netdb.h>
+#include <netinet/in.h>
 
-#define ERROR 84
+#define FD_FREE 0
+#define FD_CLIENT 1
+#define FD_SERVER 2
+
 #define SUCCESS 0
+#define ERROR 84
 
-#define READ_SIZE 1024
-
-#define CRLF1 '\r'
-#define CRLF2 '\n'
-
-#define SERVER "/server"
-#define ERR_CONNECT "Please use '/server $host[:$port]' to connect\r\n"
+#define MAX_FD 255
 
 typedef enum
   {
     false,
-        true
+    true
   } bool;
 
-typedef struct	s_client
+typedef void(*fct)();
+
+typedef struct          s_env
 {
-  char		buff[1024];
-  bool		is_connected;
-  int		fd;
-}		t_client;
+  char                  fd_type[MAX_FD];
+  fct                   fct_read[MAX_FD];
+  fct                   fct_write[MAX_FD];
+  int                   port;
+}                       t_env;
 
-void		run_client();
-bool		read_client(t_client *);
-bool		get_order(t_client *);
-bool		connect_to_server(char **, t_client *);
-bool		send_to_server(char *, int);
-bool            check_params(char **);
-char		**my_str_to_wordtab(char *, char);
-char            **my_str_to_wordtab(char *, char);
+typedef struct          s_client
+{
+  int                   fd_max;
+  int                   fd;
+  char                  *ip;
+  t_env                 e;
+  struct timeval        tv;
+  fd_set                fd_read;
+  fd_set                fd_write;
+}                       t_client;
 
+void                    run_client(t_client *);
+void                    add_server(t_client *, char **);
+void			initialise_client(t_client *);
+void			set_fds(t_client *);
+void                    add_client(t_client *);
+char			**my_str_to_wordtab(char *, char);
 #endif

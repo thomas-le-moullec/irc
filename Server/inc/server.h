@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun May 28 14:16:12 2017 Leo Le Diouron
-** Last update Wed Jun  7 22:30:40 2017 Leo Le Diouron
+** Last update Sun Jun 11 14:43:28 2017 Leo Le Diouron
 */
 
 #ifndef SERVER_H_
@@ -91,6 +91,7 @@ typedef struct		s_user
   char			nickname[SIZE_USERNAME];
   t_msg			msg;
   bool			is_activated;
+  int			last_chan;
 }			t_user;
 
 typedef struct		s_chan
@@ -135,5 +136,7 @@ void		*free_tab(char **);
 bool		send_message_all_users(t_server *, char *, int);
 char		**my_str_to_wordtab(char *, char);
 void		fill_queue(t_server *, int, char *);
+int             parse_cmd(t_server *, int, char *);
+
 
 #endif

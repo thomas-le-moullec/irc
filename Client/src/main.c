@@ -1,17 +1,22 @@
 /*
-** main.c for main in /home/le-mou_t/rendu/TEK2/C/PSU_2016_myirc
+** main.c for main in /home/le-dio_l/PSU_2016_myirc
 ** 
-** Made by Thomas LE MOULLEC
-** Login   <le-mou_t@epitech.net>
+** Made by Leo Le Diouron
+** Login   <le-dio_l@epitech.net>
 ** 
-** Started on  Sat May 27 16:24:16 2017 Thomas LE MOULLEC
-** Last update Sat May 27 17:08:47 2017 Thomas LE MOULLEC
+** Started on  Sun Jun  4 10:21:03 2017 Leo Le Diouron
+** Last update Sun Jun  4 10:22:14 2017 Leo Le Diouron
 */
 
 #include "client.h"
 
-int			main()
+int		main(int ac, char **av)
 {
-  run_client();
-  return (SUCCESS);
+  t_client	client;
+
+  (void)ac;
+  (void)av;
+  initialise_client(&client);
+  run_client(&client);
+  return (0);
 }

@@ -5,7 +5,7 @@
 ## Login   <le-dio_l@epitech.net>
 ## 
 ## Started on  Sun May 28 14:15:02 2017 Leo Le Diouron
-## Last update Fri Jun  9 10:23:57 2017 Leo Le Diouron
+## Last update Sun Jun 11 15:01:16 2017 Leo Le Diouron
 ##
 
 NAME_SERVER		=		server
@@ -18,7 +18,7 @@ RM			=		rm -rf
 
 PATH_SERVER		=		./Server/src/
 
-PATH_CLIENT		=		./ClientTest/src/
+PATH_CLIENT		=		./Client/src/
 
 SRCS_SERVER		=		$(PATH_SERVER)main.c			\
 					$(PATH_SERVER)initialisation.c		\
@@ -45,7 +45,7 @@ OBJS_CLIENT		=		$(SRCS_CLIENT:.c=.o)
 
 CFLAGS			=		-W -Wall -Wextra $(INC)
 
-INC			=		-I ./Server/inc/ -I ./ClientTest/inc/
+INC			=		-I ./Server/inc/ -I ./Client/inc/
 
 all:					$(NAME_SERVER) $(NAME_CLIENT)
 

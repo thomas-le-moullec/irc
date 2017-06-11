@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Fri Jun  9 11:08:46 2017 Leo Le Diouron
+** Last update Sun Jun 11 14:58:31 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -78,6 +78,7 @@ void		client_read(t_server *server, int fd)
     }
   else
     {
+      parse_cmd(server, fd, "QUIT");
       //printf("%d: Connection closed\n", fd);
       close(fd);
       server->e.fd_type[fd] = FD_FREE;

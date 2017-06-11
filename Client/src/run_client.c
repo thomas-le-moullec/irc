@@ -1,41 +1,86 @@
 /*
-** run_client.c for run_client in /home/le-mou_t/rendu/TEK2/C/PSU_2016_myirc
+** run_client.c for run_client in /home/le-dio_l/PSU_2016_myirc/ClientTest
 ** 
-** Made by Thomas LE MOULLEC
-** Login   <le-mou_t@epitech.net>
+** Made by Leo Le Diouron
+** Login   <le-dio_l@epitech.net>
 ** 
-** Started on  Sat May 27 17:09:26 2017 Thomas LE MOULLEC
-** Last update Sat May 27 18:37:54 2017 Thomas LE MOULLEC
+** Started on  Sun Jun  4 09:59:18 2017 Leo Le Diouron
+** Last update Mon Jun  5 20:47:18 2017 Leo Le Diouron
 */
 
 #include "client.h"
 
-bool		read_client(t_client *client)
+void			server_read(t_client *client)
 {
-  int		size;
+  char			buf[512];
 
-  size = -1;
-  if ((size = read(0, client->buff, READ_SIZE - 1)) <= 0)
-    return (false);
-  client->buff[size] = 0;
-  return (true);
+  (void)client;
+  read(client->fd, buf, 512);
+  printf("reading server : [%s]\n", buf);
 }
 
-void		run_client()
+void			server_write(t_client *client)
 {
-  bool		end;
-  t_client	client;
+  (void)client;
+  printf("writing server !\n");
+}
+
+void			add_server(t_client *client, char **cmd)
+{
+  char                  *ip;
+  int                   port;
+  struct protoent       *pe;
+  struct sockaddr_in    s_in;
+
+  printf("On add un server !\n");
+  ip = cmd[1];
+  port = atoi(cmd[2]);
+  pe = getprotobyname("TCP");
+  if (!pe || (client->fd = socket(AF_INET, SOCK_STREAM, pe->p_proto)) == -1)
+    exit(ERROR);
+  s_in.sin_family = AF_INET;
+  s_in.sin_port = htons(port);
+  s_in.sin_addr.s_addr = inet_addr(ip);
+  printf("Will try to connect to :---%s--- with port:---%d---\n", ip, port);
+  if (connect(client->fd, (struct sockaddr *)&s_in, sizeof(s_in)) == -1)
+    {
+      printf("Error on Connect\n");
+      exit(ERROR);
+    }
+  client->e.fd_type[client->fd] = FD_SERVER;
+  client->e.fct_read[client->fd] = server_read;
+  client->e.fct_write[client->fd] = server_write;
+}
+
+void                    get_order(t_client *client)
+{
+  int                   i;
+
+  i = 0;
+  while (i < MAX_FD)
+    {
+      if (FD_ISSET(i, &client->fd_read))
+	client->e.fct_read[i](client, i);
+      if (FD_ISSET(i, &client->fd_write))
+	client->e.fct_write[i](client, i);
+      i++;
+    }
+}
+
+void                    run_client(t_client *client)
+{
+  bool                  end;
 
   end = false;
-  client.is_connected = false;
-  client.fd = 0;
   while (end == false)
     {
-      memset(&client.buff, 0, READ_SIZE);
-      if (read_client(&client) == false)
-	end = true;
-      else
-	get_order(&client);
+      FD_ZERO(&client->fd_read);
+      FD_ZERO(&client->fd_write);
+      client->fd_max = 0;
+      set_fds(client);
+      if (select(client->fd_max + 1, &client->fd_read,
+		 NULL, NULL, &client->tv) == -1)
+	perror("select");
+      get_order(client);
     }
-  close(client.fd);
 }
