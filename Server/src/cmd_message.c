@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sat Jun  3 10:33:49 2017 Leo Le Diouron
-** Last update Sun Jun 11 14:02:58 2017 Leo Le Diouron
+** Last update Mon Jun 12 13:48:42 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -17,27 +17,6 @@ bool	receive_file(t_server *server, char **params, int fd_client)
   (void)fd_client;
   return (true);
 }
-
-/*bool	send_message_all_users(t_server *server, char *message, int fd_client)
-{
-  int	i;
-  int	j;
-
-  j = 0;
-  while (j < MAX_FD)
-    {
-      i = 0;
-      if (server->chans[j].users[fd_client] == 1)
-	while (i < MAX_FD)
-	  {
-	    if (server->chans[j].users[i] == 1 && i != fd_client)
-	      fill_queue(server, i, message);
-	    i++;
-	  }
-      j++;
-    }
-  return (true);
-  }*/
 
 bool	send_message_all_users(t_server *server, char *message, int fd_client)
 {

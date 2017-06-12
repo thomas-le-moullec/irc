@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Wed Jun  7 21:19:59 2017 Leo Le Diouron
-** Last update Sun Jun 11 15:01:31 2017 Leo Le Diouron
+** Last update Mon Jun 12 13:49:56 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -30,18 +30,11 @@ void	define_last_channel(t_server *server, int num_chan,
 			    int fd_client, char is_connect)
 {
   int	i;
-  //  int	j;
 
   i = -1;
-  //j = -1;
   if (is_connect == 1)
     {
       server->users[fd_client].last_chan = num_chan;
-      /*while (++j < MAX_FD)
-	if (server->chans[num_chan].users[j] == 1 && j != fd_client)
-	  dprintf(j, "%s is connected on %s.\n",
-		  server->users[fd_client].nickname,
-		  server->chans[num_chan].name);*/
       dprintf(fd_client, TOPIC);
     }
   else

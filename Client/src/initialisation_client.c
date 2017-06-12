@@ -5,7 +5,7 @@
 ** Login   <le-dio_l@epitech.net>
 ** 
 ** Started on  Sun Jun  4 09:54:35 2017 Leo Le Diouron
-** Last update Sun Jun  4 10:35:41 2017 Leo Le Diouron
+** Last update Mon Jun 12 13:56:06 2017 Leo Le Diouron
 */
 
 #include "client.h"
@@ -13,8 +13,6 @@
 void            initialise_client(t_client *client)
 {
   client->fd = 0;
-  //  client->e.port = atoi(port);
-  //client->ip = LOCALHOST;
   client->tv.tv_sec = 20;
   client->tv.tv_usec = 0;
   FD_ZERO(&client->fd_read);

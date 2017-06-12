@@ -5,7 +5,7 @@
 ** Login   <le-mou_t@epitech.net>
 ** 
 ** Started on  Sun May 28 15:40:43 2017 Thomas LE MOULLEC
-** Last update Sun Jun 11 15:09:32 2017 Leo Le Diouron
+** Last update Mon Jun 12 13:53:00 2017 Leo Le Diouron
 */
 
 #include "server.h"
@@ -69,17 +69,12 @@ void		client_read(t_server *server, int fd)
       if ((lines = get_orders(buf)) == NULL)
 	return ;
       while (lines[i] != NULL)
-	{
-	  //fill_queue(server, fd, "001 Welcome !\r\n");
-	  parse_cmd(server, fd, lines[i]);
-	  i++;
-	}
+	parse_cmd(server, fd, lines[i++]);
       free_tab(lines);
     }
   else
     {
       parse_cmd(server, fd, "QUIT");
-      //printf("%d: Connection closed\n", fd);
       close(fd);
       server->e.fd_type[fd] = FD_FREE;
     }
